@@ -6,6 +6,9 @@ var time = document.getElementById('time');
 var answerList = document.querySelector('.answers')
 var count = 60;
 var gameActive = false
+var problemNum = 0
+var pos = problemNum
+
 
 //every 1 second decrements count by one
 function countdown(){
@@ -33,24 +36,21 @@ function removeStart(){
 }
 
 // problem object
-var problems = {
+var problems = [
 
-    question1 : {
+    question1 = {
         problem : "this is a problem",
-
         answers: [
             "quesion1",
             "question2",
             "question3",
             "question4",
         ],
-
         correctAnswer : 0
         
     },
-    question2 : {
-        problem : "this is a problem",
-
+    question2 = {
+        problem : "this is a problem 2",
         answers: [
             "quesion1",
             "question2",
@@ -59,14 +59,14 @@ var problems = {
         ],
 
         correctAnswer : 2
-        
+            
     }
-}
-
+   ]
+console.log(problems[pos])
 
 //getting the question
 function getQuestion(){
-    var question = problems.question1.problem
+    var question = problems[pos].problem
     title.innerHTML = question
 }
 
@@ -74,24 +74,32 @@ function getQuestion(){
 
 //populating answers in answer div and checking for answer
 function getAnswer(){
-    problems.question1.answers.forEach(populateAns)
+   
+    problems[pos].answers.forEach(populateAns)
 
-    function populateAns(item , index){
+    function populateAns(item , index ){
+        
         //creating anwer buttons
         var ans = document.createElement('button')
         var textnode = document.createTextNode(item);
         ans.id  = index;
         ans.appendChild(textnode);
         answerList.appendChild(ans);
-        
+    
         //Checking for correct anwser click
         ans.addEventListener("click", function(){
-            if(index === problems.question1.correctAnswer){
+            if(index === problems[pos].correctAnswer){
                 ans.style.background = "green"
+                problemNum ++
+
+                return problemNum    
             }
             else{
                 ans.style.background = 'red'
+                console.log('try again')
             }
+            return
+            
         })
        
     }
@@ -100,8 +108,7 @@ function getAnswer(){
 
 // when the button is clicked this is ran
 startButton.addEventListener("click", function(){
-    gameActive = "true"
-    
+    gameActive = "true";
     //starts coundown
     countdown()
     //removes start menu

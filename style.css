@@ -1,0 +1,50 @@
+
+nav{
+    display: flex;
+    justify-content: space-around;
+}
+a{
+    text-decoration: none;
+    color: violet;
+}
+section{
+    margin-top: 10%;
+    margin-left: 10%;
+    margin-right: 10%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+
+}
+
+#start{
+    margin-left: 40%;
+    margin-right: 40%;
+    
+}
+
+#title{
+    text-align: center;
+    font-size: 40px;
+}
+
+.table{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+   
+}
+.answers{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    
+    
+}
+
+.answers button{
+
+    padding: 2%;
+    margin: 2%;
+}
+

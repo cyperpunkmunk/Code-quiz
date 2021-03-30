@@ -1,5 +1,3 @@
-
-//declarations
 var startButton = document.getElementById('start')
 var title = document.getElementById('title')
 var time = document.getElementById('time');
@@ -7,7 +5,6 @@ var answerList = document.querySelector('.answers')
 var count = 60;
 var gameActive = false
 var problemNum = 0
-var pos = problemNum
 
 
 //every 1 second decrements count by one
@@ -35,64 +32,73 @@ function removeStart(){
 
 }
 
-// problem object
-var problems = [
+// problems
+var problems = [{      
+    problem : "this is a problem",
+    answers: [
+        "question1",
+        "question2",
+        "question3",
+        "question4",
+    ],
+    correctAnswer : 'question1'},
+    {
+    problem : "this is a problem 2",
+    answers: [
+        "quesion1",
+        "question2",
+        "question3",
+        "question4",
+    ],
+    correctAnswer : "question2"},
+       
+    
+]
 
-    question1 = {
-        problem : "this is a problem",
-        answers: [
-            "quesion1",
-            "question2",
-            "question3",
-            "question4",
-        ],
-        correctAnswer : 0
-        
-    },
-    question2 = {
-        problem : "this is a problem 2",
-        answers: [
-            "quesion1",
-            "question2",
-            "question3",
-            "question4",
-        ],
 
-        correctAnswer : 2
-            
-    }
-   ]
-console.log(problems[pos])
-
-//getting the question
-function getQuestion(){
-    var question = problems[pos].problem
-    title.innerHTML = question
-}
-
+var problemScr = problems[problemNum].problem
+var answerScr = problems[problemNum].answers
+var correctScr = problems[problemNum].correctAnswer
+console.log(correctScr)
 
 
 //populating answers in answer div and checking for answer
-function getAnswer(){
+function getScreen(){
    
-    problems[pos].answers.forEach(populateAns)
+    
+    //what is displayed depending on the problem number
+    function screen(problemScr , answerScr , correctScr){
+        this.problemScr = problemScr;
+        this.answerScr = answerScr;
+        this.correctScr = correctScr
+    }
+    
+    
+    
+    //gettig the question
+    var question = problems[problemNum].problem
+    title.innerHTML = question
 
-    function populateAns(item , index ){
+    //populating each button with content
+    answerScr.forEach(populateAns)
+    function populateAns(index){
         
-        //creating anwer buttons
+        //creating answer buttons
         var ans = document.createElement('button')
-        var textnode = document.createTextNode(item);
-        ans.id  = index;
+        var textnode = document.createTextNode([index]);
+        console.log(index)
         ans.appendChild(textnode);
-        answerList.appendChild(ans);
+        answerList.appendChild(ans)
     
         //Checking for correct anwser click
         ans.addEventListener("click", function(){
-            if(index === problems[pos].correctAnswer){
+            if(index === correctScr){
                 ans.style.background = "green"
                 problemNum ++
-
-                return problemNum    
+                
+                new screen
+                console.log(problemNum)
+                return screen
             }
             else{
                 ans.style.background = 'red'
@@ -114,8 +120,8 @@ startButton.addEventListener("click", function(){
     //removes start menu
     removeStart()
     // gets and posts answers with question
-    getAnswer()
-    getQuestion()
+    getScreen()
+   
 
 
 })
